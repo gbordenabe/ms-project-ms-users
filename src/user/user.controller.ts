@@ -33,4 +33,12 @@ export class UserController {
   remove(@Payload() id: string) {
     return this.userService.remove(+id);
   }
+
+  @MessagePattern(UserMSG.CHECK_USERNAME_EMAIL_DISPONIBILITY)
+  checkUser(@Payload() payload: { username: string; email: string }) {
+    return this.userService.checkUsernameEmailDisponibility(
+      payload.username,
+      payload.email,
+    );
+  }
 }
