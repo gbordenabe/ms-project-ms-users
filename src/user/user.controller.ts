@@ -24,6 +24,11 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
+  @MessagePattern(UserMSG.FIND_ONE_BY_USERNAME)
+  findOneByUsername(@Payload() username: string) {
+    return this.userService.findOneByUsername(username);
+  }
+
   @MessagePattern(UserMSG.UPDATE)
   update(@Payload() payload: { id: string; updateUserDto: UpdateUserDto }) {
     return this.userService.update(+payload.id, payload.updateUserDto);

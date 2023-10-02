@@ -35,6 +35,18 @@ export class UserService {
     return `This action returns a #${id} user`;
   }
 
+  async findOneByUsername(username: string) {
+    try {
+      const user = await this.userModel.findOne({ username });
+      if (!user) {
+        throw new BadRequestException('User not found');
+      }
+      return microserviceResponses.success(user);
+    } catch (error) {
+      return microserviceResponses.error(error);
+    }
+  }
+
   update(id: number, updateUserDto: UpdateUserDto) {
     return `This action updates a #${id} user`;
   }
